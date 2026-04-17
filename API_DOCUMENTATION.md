@@ -1,480 +1,293 @@
 # API Documentation
 
 ## Base URL
-```
+
+```text
 http://localhost:5000/api
 ```
 
 ## Authentication
 
-All protected endpoints require a Bearer token in the Authorization header:
+Protected routes require a Bearer token:
 
-```
+```text
 Authorization: Bearer <token>
 ```
 
----
+## Auth Endpoints
 
-## Authentication Endpoints
+### `POST /auth/register`
 
-### 1. Register User
+Create a new user.
 
-**Endpoint:** `POST /auth/register`
+Request body:
 
-**Description:** Create a new user account
-
-**Request Body:**
 ```json
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "password": "Test1234"
+  "password": "Secret123"
 }
 ```
 
-**Success Response (200):**
+Success response:
+
 ```json
 {
-  "success": true,
-  "message": "User registered successfully",
+  "message": "User created successfully",
   "user": {
     "_id": "507f1f77bcf86cd799439011",
     "name": "John Doe",
+    "fullName": "John Doe",
     "email": "john@example.com"
-  }
+  },
+  "token": "jwt_token_here"
 }
 ```
 
-**Error Response (400):**
-```json
-{
-  "success": false,
-  "message": "Email already exists"
-}
-```
+### `POST /auth/login`
 
----
+Log in an existing user.
 
-### 2. Login User
+Request body:
 
-**Endpoint:** `POST /auth/login`
-
-**Description:** Authenticate user and receive JWT token
-
-**Request Body:**
 ```json
 {
   "email": "john@example.com",
-  "password": "Test1234"
+  "password": "Secret123"
 }
 ```
 
-**Success Response (200):**
+Success response:
+
 ```json
 {
-  "success": true,
-  "message": "Login successful",
+  "message": "User logged in successfully",
   "user": {
     "_id": "507f1f77bcf86cd799439011",
     "name": "John Doe",
+    "fullName": "John Doe",
     "email": "john@example.com"
   },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "token": "jwt_token_here"
 }
 ```
 
-**Error Response (401):**
+### `GET /auth/get-me`
+
+Get the currently authenticated user.
+
+Success response:
+
 ```json
 {
-  "success": false,
-  "message": "Invalid credentials"
-}
-```
-
----
-
-### 3. Get Current User
-
-**Endpoint:** `GET /auth/get-me`
-
-**Description:** Get authenticated user's information
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Success Response (200):**
-```json
-{
-  "success": true,
+  "message": "User fetched successfully",
   "user": {
     "_id": "507f1f77bcf86cd799439011",
     "name": "John Doe",
+    "fullName": "John Doe",
     "email": "john@example.com"
   }
 }
 ```
 
-**Error Response (401):**
-```json
-{
-  "success": false,
-  "message": "Not authorized"
-}
-```
-
----
-
 ## Task Endpoints
 
-### 1. Get All Tasks
+### `GET /tasks/all`
 
-**Endpoint:** `GET /tasks/all`
+Get all tasks for the logged-in user.
 
-**Description:** Fetch all tasks for the authenticated user
+Optional query:
 
-**Headers:**
+```text
+?status=pending
+?status=completed
 ```
-Authorization: Bearer <token>
-```
 
-**Query Parameters (Optional):**
-- `status` - Filter by status: `pending` or `completed`
+Success response:
 
-**Success Response (200):**
 ```json
 {
-  "success": true,
   "tasks": [
     {
       "_id": "507f1f77bcf86cd799439012",
-      "userId": "507f1f77bcf86cd799439011",
       "title": "Buy groceries",
       "description": "Milk, eggs, bread",
-      "priority": "medium",
-      "completed": false,
-      "createdAt": "2024-04-17T10:00:00Z",
-      "updatedAt": "2024-04-17T10:00:00Z"
-    },
-    {
-      "_id": "507f1f77bcf86cd799439013",
-      "userId": "507f1f77bcf86cd799439011",
-      "title": "Finish project",
-      "description": "Complete React frontend",
-      "priority": "high",
-      "completed": true,
-      "createdAt": "2024-04-16T15:30:00Z",
-      "updatedAt": "2024-04-17T09:00:00Z"
+      "status": "pending",
+      "user": "507f1f77bcf86cd799439011",
+      "createdAt": "2026-04-18T10:00:00.000Z",
+      "updatedAt": "2026-04-18T10:00:00.000Z"
     }
   ]
 }
 ```
 
-**Error Response (401):**
-```json
-{
-  "success": false,
-  "message": "Not authorized"
-}
-```
+### `POST /tasks/create`
 
----
+Create a new task.
 
-### 2. Create Task
+Request body:
 
-**Endpoint:** `POST /tasks/create`
-
-**Description:** Create a new task
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body:**
 ```json
 {
   "title": "Buy groceries",
-  "description": "Milk, eggs, bread",
-  "priority": "medium"
+  "description": "Milk, eggs, bread"
 }
 ```
 
-**Priority Values:** `low`, `medium`, `high`
+Success response:
 
-**Success Response (201):**
 ```json
 {
-  "success": true,
   "message": "Task created successfully",
   "task": {
     "_id": "507f1f77bcf86cd799439012",
-    "userId": "507f1f77bcf86cd799439011",
     "title": "Buy groceries",
     "description": "Milk, eggs, bread",
-    "priority": "medium",
-    "completed": false,
-    "createdAt": "2024-04-17T10:00:00Z",
-    "updatedAt": "2024-04-17T10:00:00Z"
+    "status": "pending",
+    "user": "507f1f77bcf86cd799439011",
+    "createdAt": "2026-04-18T10:00:00.000Z",
+    "updatedAt": "2026-04-18T10:00:00.000Z"
   }
 }
 ```
 
-**Error Response (400):**
+### `PUT /tasks/edit/:taskId`
+
+Update title and/or description.
+
+Request body:
+
 ```json
 {
-  "success": false,
-  "message": "Title is required"
+  "title": "Buy groceries and fruits",
+  "description": "Milk, eggs, bread, apples"
 }
 ```
 
----
+Success response:
 
-### 3. Update Task
-
-**Endpoint:** `PUT /tasks/edit/:taskId`
-
-**Description:** Update task details (title, description, priority)
-
-**Parameters:**
-- `taskId` - The ID of the task to update
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Request Body (Optional fields):**
 ```json
 {
-  "title": "Buy groceries and cook",
-  "description": "Updated description",
-  "priority": "high"
-}
-```
-
-**Success Response (200):**
-```json
-{
-  "success": true,
   "message": "Task updated successfully",
   "task": {
     "_id": "507f1f77bcf86cd799439012",
-    "userId": "507f1f77bcf86cd799439011",
-    "title": "Buy groceries and cook",
-    "description": "Updated description",
-    "priority": "high",
-    "completed": false,
-    "createdAt": "2024-04-17T10:00:00Z",
-    "updatedAt": "2024-04-17T11:00:00Z"
+    "title": "Buy groceries and fruits",
+    "description": "Milk, eggs, bread, apples",
+    "status": "pending"
   }
 }
 ```
 
-**Error Response (404):**
+### `PUT /tasks/status/:taskId`
+
+Mark a task as pending or completed.
+
+Request body:
+
 ```json
 {
-  "success": false,
-  "message": "Task not found"
+  "status": "completed"
 }
 ```
 
----
+Allowed values:
 
-### 4. Update Task Status
-
-**Endpoint:** `PUT /tasks/status/:taskId`
-
-**Description:** Mark task as completed or pending
-
-**Parameters:**
-- `taskId` - The ID of the task
-
-**Headers:**
-```
-Authorization: Bearer <token>
+```text
+pending
+completed
 ```
 
-**Request Body:**
+Success response:
+
 ```json
 {
-  "completed": true
-}
-```
-
-**Success Response (200):**
-```json
-{
-  "success": true,
   "message": "Task status updated successfully",
   "task": {
     "_id": "507f1f77bcf86cd799439012",
-    "userId": "507f1f77bcf86cd799439011",
     "title": "Buy groceries",
     "description": "Milk, eggs, bread",
-    "priority": "medium",
-    "completed": true,
-    "createdAt": "2024-04-17T10:00:00Z",
-    "updatedAt": "2024-04-17T11:00:00Z"
+    "status": "completed"
   }
 }
 ```
 
----
+### `DELETE /tasks/delete/:taskId`
 
-### 5. Delete Task
+Delete a task.
 
-**Endpoint:** `DELETE /tasks/delete/:taskId`
+Success response:
 
-**Description:** Delete a task permanently
-
-**Parameters:**
-- `taskId` - The ID of the task to delete
-
-**Headers:**
-```
-Authorization: Bearer <token>
-```
-
-**Success Response (200):**
 ```json
 {
-  "success": true,
   "message": "Task deleted successfully"
 }
 ```
 
-**Error Response (404):**
+## Common Error Responses
+
 ```json
 {
-  "success": false,
+  "message": "Please fill all the fields"
+}
+```
+
+```json
+{
+  "message": "Invalid token"
+}
+```
+
+```json
+{
   "message": "Task not found"
 }
 ```
 
----
+## cURL Examples
 
-## Error Codes
+Register:
 
-| Code | Description |
-|------|-------------|
-| 200 | OK - Request successful |
-| 201 | Created - Resource created successfully |
-| 400 | Bad Request - Invalid input data |
-| 401 | Unauthorized - Invalid or missing token |
-| 403 | Forbidden - User doesn't have permission |
-| 404 | Not Found - Resource not found |
-| 500 | Internal Server Error - Server error |
-
----
-
-## Common Error Messages
-
-```json
-{
-  "success": false,
-  "message": "Validation failed",
-  "errors": {
-    "title": "Title is required"
-  }
-}
-```
-
----
-
-## Request Examples using cURL
-
-### Register
 ```bash
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "John Doe",
     "email": "john@example.com",
-    "password": "Test1234"
+    "password": "Secret123"
   }'
 ```
 
-### Login
+Login:
+
 ```bash
 curl -X POST http://localhost:5000/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "john@example.com",
-    "password": "Test1234"
+    "password": "Secret123"
   }'
 ```
 
-### Get All Tasks
-```bash
-curl -X GET http://localhost:5000/api/tasks/all \
-  -H "Authorization: Bearer YOUR_TOKEN_HERE"
-```
+Create task:
 
-### Create Task
 ```bash
 curl -X POST http://localhost:5000/api/tasks/create \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
     "title": "Buy groceries",
-    "description": "Milk, eggs, bread",
-    "priority": "medium"
+    "description": "Milk, eggs, bread"
   }'
 ```
 
-### Update Task
+Update status:
+
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/edit/507f1f77bcf86cd799439012 \
+curl -X PUT http://localhost:5000/api/tasks/status/TASK_ID_HERE \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN_HERE" \
   -d '{
-    "title": "Updated title",
-    "priority": "high"
+    "status": "completed"
   }'
 ```
-
-### Update Task Status
-```bash
-curl -X PUT http://localhost:5000/api/tasks/status/507f1f77bcf86cd799439012 \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_TOKEN_HERE" \
-  -d '{
-    "completed": true
-  }'
-```
-
-### Delete Task
-```bash
-curl -X DELETE http://localhost:5000/api/tasks/delete/507f1f77bcf86cd799439012 \
-  -H "Authorization: Bearer YOUR_TOKEN_HERE"
-```
-
----
-
-## Response Structure
-
-All API responses follow this structure:
-
-```json
-{
-  "success": true/false,
-  "message": "Descriptive message",
-  "data": {} or [],
-  "errors": {} (optional)
-}
-```
-
----
-
-## Rate Limiting
-
-Currently no rate limiting implemented. Consider adding in production.
-
----
-
-## Version
-
-- **API Version:** 1.0.0
-- **Last Updated:** April 2024
