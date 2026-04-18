@@ -16,7 +16,6 @@ const allowedOrigins = [
 app.use(
   cors({
     origin(origin, callback) {
-      // Allow requests from the deployed frontend and non-browser tools.
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }

@@ -73,7 +73,7 @@ const Login = () => {
 
   return (
     <div className="min-h-screen w-full bg-[radial-gradient(circle_at_top,#dbeafe_0%,#eff6ff_34%,#f8fafc_68%,#ffffff_100%)] px-4 py-6 sm:px-6 lg:px-8">
-      <div className="mx-auto grid min-h-[calc(100vh-3rem)] w-full max-w-6xl overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_30px_80px_rgba(15,23,42,0.10)] lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mx-auto grid min-h-[calc(100vh-3rem)] w-full max-w-6xl overflow-hidden rounded-4xl border border-slate-200 bg-white shadow-[0_30px_80px_rgba(15,23,42,0.10)] lg:grid-cols-[1.05fr_0.95fr]">
         <section className="hidden lg:flex flex-col justify-between bg-slate-900 p-12 text-white">
           <div>
             <div className="mb-10 flex items-center gap-3">

@@ -21,16 +21,14 @@ const TaskList = ({ tasks, onDelete, onComplete, onEdit }) => {
         return (
           <div
             key={taskId || `${task.title || "task"}-${index}`}
-            className={`rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6 ${
-              task.completed ? "opacity-80" : ""
-            }`}
+            className={`rounded-3xl border border-slate-200 bg-white/90 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-6`}
           >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex min-w-0 flex-1 items-start gap-4">
                 <button
                   type="button"
                   onClick={() => onComplete(taskId, task.completed)}
-                  className={`mt-1 rounded-full transition ${
+                  className={`mt-1 rounded-full transition cursor-pointer ${
                     task.completed
                       ? "text-green-500"
                       : "text-slate-400 hover:text-green-500"
@@ -48,7 +46,7 @@ const TaskList = ({ tasks, onDelete, onComplete, onEdit }) => {
                     <h3
                       className={`text-lg font-semibold ${
                         task.completed
-                          ? "text-slate-500 line-through"
+                          ? "text-slate-500"
                           : "text-slate-900"
                       }`}
                     >
@@ -67,9 +65,7 @@ const TaskList = ({ tasks, onDelete, onComplete, onEdit }) => {
 
                   {task.description && (
                     <p
-                      className={`mb-3 text-sm leading-6 text-slate-600 ${
-                        task.completed ? "line-through" : ""
-                      }`}
+                      className={`mb-3 text-sm leading-6 text-slate-600`}
                     >
                       {task.description}
                     </p>
