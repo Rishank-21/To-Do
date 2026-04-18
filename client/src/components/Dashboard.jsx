@@ -243,6 +243,27 @@ const Dashboard = () => {
           </div>
         </section>
 
+
+
+                {showForm && (
+          <div className="mb-6">
+            <TaskForm
+              key={editingTask?._id || "new-task"}
+              onSubmit={
+                editingTask
+                  ? (data) => handleUpdateTask(editingTask._id, data)
+                  : handleAddTask
+              }
+              initialData={editingTask}
+              isEditing={Boolean(editingTask)}
+              onCancel={() => {
+                setShowForm(false);
+                setEditingTask(null);
+              }}
+            />
+          </div>
+        )}
+
         <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-sm">
             <div className="flex items-center justify-between">
@@ -290,24 +311,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        {showForm && (
-          <div className="mb-6">
-            <TaskForm
-              key={editingTask?._id || "new-task"}
-              onSubmit={
-                editingTask
-                  ? (data) => handleUpdateTask(editingTask._id, data)
-                  : handleAddTask
-              }
-              initialData={editingTask}
-              isEditing={Boolean(editingTask)}
-              onCancel={() => {
-                setShowForm(false);
-                setEditingTask(null);
-              }}
-            />
-          </div>
-        )}
+
 
         <div className="mb-6 rounded-3xl border border-slate-200 bg-white/90 p-4 shadow-sm sm:p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
