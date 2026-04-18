@@ -1,0 +1,119 @@
+# 📝 MERN Stack To-Do Application
+
+A full-stack To-Do application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can register, log in, and manage their personal tasks securely with JWT authentication.
+
+---
+
+## 🚀 Live Demo
+
+🌐 Frontend (Vercel):  
+https://to-do-psi-bice-47.vercel.app/ 
+
+⚙️ Backend (Render):  
+https://to-do-cu5r.onrender.com/ 
+
+---
+
+## 📂 GitHub Repository
+
+🔗 https://github.com/Rishank-21/To-Do/
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- User Registration
+- User Login
+- JWT-based Authentication
+- Protected Routes
+
+### 📝 Task Management
+- Add New Task  
+- View All Tasks (User-specific)  
+- Mark Task as Completed  
+- Delete Task  
+- Edit Task (Bonus)  
+- Filter Tasks (Completed / Pending) (Bonus)  
+
+### 🎨 Frontend
+- Responsive UI  
+- Clean design  
+- Form validation  
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- React.js  
+- Axios  
+
+**Backend:**
+- Node.js  
+- Express.js  
+- MongoDB  
+- Mongoose  
+- JSON Web Token (JWT)  
+
+---
+
+## 📁 Folder Structure
+To-Do/
+│
+├── client/ # React Frontend
+│ ├── src/
+│ └── package.json
+│
+├── server/ # Node + Express Backend
+│ ├── models/
+│ ├── routes/
+│ ├── controllers/
+│ ├── middleware/
+│ └── server.js
+│
+└── README.md
+
+
+---
+
+
+⚙️ Installation & Setup
+1️⃣ Clone the repository
+Bash
+git clone [https://github.com/Rishank-21/To-Do.git](https://github.com/Rishank-21/To-Do.git)
+cd To-Do
+2️⃣ Setup Backend
+Bash
+cd server
+npm install
+Create a .env file inside the server/ directory:
+
+Code snippet
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+Run backend:
+
+Bash
+npm start
+3️⃣ Setup Frontend
+Bash
+cd ../client
+npm install
+npm start
+🔒 API Endpoints
+Auth Routes
+Method	Endpoint	Description
+POST	/api/auth/register	Register a new user
+POST	/api/auth/login	Login user & get token
+Task Routes (Protected)
+Method	Endpoint	Description
+GET	/api/tasks	Get all tasks for logged-in user
+POST	/api/tasks	Add a new task
+PUT	/api/tasks/:id	Update task details or status
+DELETE	/api/tasks/:id	Delete a specific task
+🔑 Demo Credentials
+Email: test@gmail.com
+Password: 123456
+"""
