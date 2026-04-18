@@ -62,19 +62,29 @@ https://to-do-cu5r.onrender.com/
 
 
 To-Do/
-│
-├── client/ # React Frontend
-│ ├── src/
-│ └── package.json
-│
-├── server/ # Node + Express Backend
-│ ├── models/
-│ ├── routes/
-│ ├── controllers/
-│ ├── middleware/
-│ └── server.js
-│
-└── README.md
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── App.jsx
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── .env
+│   ├── package.json
+│   └── vite.config.js
+├── server/
+│   ├── controller/
+│   ├── db/
+│   ├── middleware/
+│   ├── model/
+│   ├── route/
+│   ├── .env
+│   ├── app.js
+│   ├── package.json
+│   └── server.js
+├── API_DOCUMENTATION.md
+├── QUICKSTART.md
+└── SETUP.md
 
 
 ---
