@@ -1,5 +1,23 @@
 # 📝 MERN Stack To-Do Application
 
+A full-stack To-Do application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). Users can register, log in, and manage their personal tasks securely with JWT authentication.
+
+---
+
+## 🚀 Live Demo
+
+🌐 **Frontend (Vercel):**  
+https://to-do-psi-bice-47.vercel.app/
+
+⚙️ **Backend (Render):**  
+https://to-do-cu5r.onrender.com/
+
+---
+
+## 📂 GitHub Repository
+
+🔗 https://github.com/Rishank-21/To-Do/
+
 This project is a MERN To-Do application with:
 
 - React frontend
