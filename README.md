@@ -34,7 +34,7 @@ https://to-do-cu5r.onrender.com/
 - Mark Task as Completed  
 - Delete Task  
 - Edit Task *(Bonus)*  
-- Filter Tasks (Completed / Pending) *(Bonus)*  
+- Filter Tasks *(Completed / Pending)* *(Bonus)*  
 
 ### 🎨 Frontend
 - Responsive UI  
@@ -61,13 +61,12 @@ https://to-do-cu5r.onrender.com/
 ## 📁 Folder Structure
 
 
-
 To-Do/
 │
-├── client/ # React Frontend
+├── client/
 │ ├── src/
-│ │ ├── components/ # Reusable UI components
-│ │ ├── context/ # Global state (Context API)
+│ │ ├── components/
+│ │ ├── context/
 │ │ ├── App.jsx
 │ │ ├── index.css
 │ │ └── main.jsx
@@ -75,23 +74,21 @@ To-Do/
 │ ├── package.json
 │ └── vite.config.js
 │
-├── server/ # Node + Express Backend
-│ ├── controller/ # Business logic
-│ ├── db/ # Database connection
-│ ├── middleware/ # Auth middleware (JWT)
-│ ├── model/ # Mongoose models
-│ ├── route/ # API routes
+├── server/
+│ ├── controller/
+│ ├── db/
+│ ├── middleware/
+│ ├── model/
+│ ├── route/
 │ ├── .env
 │ ├── app.js
 │ ├── server.js
 │ └── package.json
 │
-├── API_DOCUMENTATION.md # API details
-├── QUICKSTART.md # Quick setup guide
-├── SETUP.md # Detailed setup instructions
+├── API_DOCUMENTATION.md
+├── QUICKSTART.md
+├── SETUP.md
 └── README.md
-
-
 
 
 ---
@@ -127,13 +124,13 @@ POST	/api/auth/register	Register a new user
 POST	/api/auth/login	Login user & get token
 Task Routes (Protected)
 Method	Endpoint	Description
-GET	/api/tasks	Get all tasks for logged user
-POST	/api/tasks	Add a new task
+GET	/api/tasks	Get all tasks
+POST	/api/tasks	Add new task
 PUT	/api/tasks/:id	Update task (edit/complete)
-DELETE	/api/tasks/:id	Delete a task
+DELETE	/api/tasks/:id	Delete task
 🔑 Demo Credentials
 
-Use these credentials to test the application:
+Use these credentials:
 
 Email: test@gmail.com
 Password: 123456
