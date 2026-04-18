@@ -61,30 +61,37 @@ https://to-do-cu5r.onrender.com/
 ## 📁 Folder Structure
 
 
+
 To-Do/
-├── client/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── App.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── .env
-│   ├── package.json
-│   └── vite.config.js
-├── server/
-│   ├── controller/
-│   ├── db/
-│   ├── middleware/
-│   ├── model/
-│   ├── route/
-│   ├── .env
-│   ├── app.js
-│   ├── package.json
-│   └── server.js
-├── API_DOCUMENTATION.md
-├── QUICKSTART.md
-└── SETUP.md
+│
+├── client/ # React Frontend
+│ ├── src/
+│ │ ├── components/ # Reusable UI components
+│ │ ├── context/ # Global state (Context API)
+│ │ ├── App.jsx
+│ │ ├── index.css
+│ │ └── main.jsx
+│ ├── .env
+│ ├── package.json
+│ └── vite.config.js
+│
+├── server/ # Node + Express Backend
+│ ├── controller/ # Business logic
+│ ├── db/ # Database connection
+│ ├── middleware/ # Auth middleware (JWT)
+│ ├── model/ # Mongoose models
+│ ├── route/ # API routes
+│ ├── .env
+│ ├── app.js
+│ ├── server.js
+│ └── package.json
+│
+├── API_DOCUMENTATION.md # API details
+├── QUICKSTART.md # Quick setup guide
+├── SETUP.md # Detailed setup instructions
+└── README.md
+
+
 
 
 ---
